@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="blue">#008EFF</color>
+
+    <color name="dark_pink">#FFCCDC</color>
+    <color name="light_orange">#FBE3CD</color>
+    <color name="sixty_capacity_white">#8CFFFFFF</color>
+    <color name="gradiant_color">#673AB7</color>
+
+</resources>
