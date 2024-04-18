@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.sk.carmusicapp"
+    namespace = "com.macapp.carmusicapp"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.sk.carmusicapp"
+        applicationId = "com.macapp.carmusicapp"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

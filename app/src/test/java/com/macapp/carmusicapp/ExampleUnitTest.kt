@@ -1,4 +1,4 @@
-package com.sk.carmusicapp
+package com.macapp.carmusicapp
 
 import org.junit.Test
 

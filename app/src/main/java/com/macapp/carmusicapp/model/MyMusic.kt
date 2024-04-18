@@ -1,4 +1,4 @@
-package com.sk.carmusicapp.model
+package com.macapp.carmusicapp.model
 
 
 import com.google.gson.annotations.SerializedName

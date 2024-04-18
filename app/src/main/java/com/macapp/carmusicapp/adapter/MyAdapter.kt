@@ -1,4 +1,4 @@
-package com.sk.carmusicapp.adapter
+package com.macapp.carmusicapp.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -10,8 +10,8 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.ScaleAnimation
 import androidx.recyclerview.widget.RecyclerView
-import com.sk.carmusicapp.databinding.LayoutItemMusicBinding
-import com.sk.carmusicapp.model.MyMusic
+import com.macapp.carmusicapp.databinding.LayoutItemMusicBinding
+import com.macapp.carmusicapp.model.MyMusic
 import com.squareup.picasso.Picasso
 
 
@@ -19,9 +19,9 @@ class MyAdapter(
     private val context: Context,
     private val musicList: List<MyMusic.Data>?,
     private val itemClickListener: ItemClickListener,
-    private val currentPosition:Int
+    private val currentPosition: Int
 
-) : RecyclerView.Adapter<MyAdapter.MyViewHolder>(){
+) : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
 
     private var selectedItemPosition: Int = RecyclerView.NO_POSITION
     private var lastPosition = -1
@@ -40,14 +40,19 @@ class MyAdapter(
             binding.songTitle2.text = data.artist.name
             Picasso.get().load(data.album.cover).into(binding.imageViewControl)
             setAnimation(viewToAnimate = itemView, position)
-            Log.d("TAG","currentPosition $currentPosition")
-//            Log.d("TAG", "bind: $nextSongPosition")
-//            Log.d("TAG", "bind: $previousSongPosition")
-            if (selectedItemPosition == adapterPosition) {
+//            Log.d("TAG","currentPosition $currentPosition")
+
+            if (currentPosition == adapterPosition ) {
                 binding.parentCard.setBackgroundColor(Color.parseColor("#66EFEDED"))
-            } else {
+            } else if (selectedItemPosition==adapterPosition){
+                binding.parentCard.setBackgroundColor(Color.parseColor("#66EFEDED"))
+            } else{
                 binding.parentCard.setBackgroundColor(Color.parseColor("#66535050"))
+
             }
+            Log.d("TAG", "selectedItemPosition: $selectedItemPosition")
+            Log.d("TAG", "adapterPosition: $adapterPosition")
+            Log.d("TAG", "currentPosition: $currentPosition")
 
         }
 
@@ -77,7 +82,7 @@ class MyAdapter(
             parent,
             false
         )
-        Log.d("TAG", "onCreateViewHolder: $currentPosition")
+//        Log.d("TAG", "onCreateViewHolder: $currentPosition")
 
         return MyViewHolder(binding)
     }
@@ -87,7 +92,7 @@ class MyAdapter(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        Log.d("TAG","selectedpositiom $currentPosition")
+//        Log.d("TAG","selectedpositiom $currentPosition")
 
         musicList?.get(position)?.let { holder.bind(it) }
     }

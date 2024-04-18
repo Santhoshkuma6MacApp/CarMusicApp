@@ -1,4 +1,4 @@
-package com.sk.carmusicapp.activity
+package com.macapp.carmusicapp.activity
 
 import android.annotation.SuppressLint
 import android.media.MediaPlayer
@@ -9,16 +9,17 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.SeekBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
-import com.sk.carmusicapp.R
-import com.sk.carmusicapp.adapter.MyAdapter
-import com.sk.carmusicapp.api.Response
-import com.sk.carmusicapp.databinding.ActivityMainBinding
-import com.sk.carmusicapp.model.MyMusic
-import com.sk.carmusicapp.viewmodel.MusicViewModel
+import com.macapp.carmusicapp.R
+import com.macapp.carmusicapp.adapter.MyAdapter
+import com.macapp.carmusicapp.api.Response
+import com.macapp.carmusicapp.databinding.ActivityMainBinding
+import com.macapp.carmusicapp.model.MyMusic
+import com.macapp.carmusicapp.viewmodel.MusicViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.launch
 
@@ -68,11 +69,20 @@ class MainActivity : AppCompatActivity(), MyAdapter.ItemClickListener {
     private fun initializeListeners() {
         mainActivity.ivNext.setOnClickListener {
             playNextSong()
+
         }
         mainActivity.ivPre.setOnClickListener {
             playPreviousSong()
 
         }
+        mMediaPlayer.setOnCompletionListener {
+
+            playNextSong()
+            Toast.makeText(this,"Next Song Played",Toast.LENGTH_LONG).show()
+
+        }
+
+
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -85,7 +95,7 @@ class MainActivity : AppCompatActivity(), MyAdapter.ItemClickListener {
                 val nextSong = musicList[playPosition]
                 Log.d("TAG", "Next button Clicked : Current Song Position: $playPosition")
                 nextSongPosition = playPosition
-                myAdapter = MyAdapter(this@MainActivity, musicList, this,playPosition)
+                myAdapter = MyAdapter(this@MainActivity, musicList, this, playPosition)
                 mainActivity.recyclerview.adapter = myAdapter
                 myAdapter?.notifyDataSetChanged()
 
@@ -113,11 +123,11 @@ class MainActivity : AppCompatActivity(), MyAdapter.ItemClickListener {
             val previousPosition = if (playPosition > 0) playPosition - 1 else musicList.size - 1
 
             // Ensure the calculated index is within bounds
-            if (previousPosition >= 0 && previousPosition < musicList.size) {
+            if (previousPosition < musicList.size) {
                 val previousSong = musicList[previousPosition]
                 Log.d("TAG", "Previous button Clicked : Current Song Position: $previousPosition")
                 previousSongPosition = previousPosition
-                myAdapter = MyAdapter(this@MainActivity, musicList, this,previousPosition)
+                myAdapter = MyAdapter(this@MainActivity, musicList, this, previousPosition)
                 mainActivity.recyclerview.adapter = myAdapter
                 myAdapter?.notifyDataSetChanged()
                 val previousSongUrl = previousSong.preview
@@ -149,7 +159,7 @@ class MainActivity : AppCompatActivity(), MyAdapter.ItemClickListener {
         when (response) {
             is Response.Success -> {
                 musicList.addAll(response.data!!.data)
-                myAdapter = MyAdapter(this@MainActivity, response.data?.data, this,0)
+                myAdapter = MyAdapter(this@MainActivity, response.data?.data, this, 0)
                 mainActivity.recyclerview.adapter = myAdapter
                 myAdapter?.notifyDataSetChanged()
 
@@ -175,11 +185,10 @@ class MainActivity : AppCompatActivity(), MyAdapter.ItemClickListener {
     }
 
 
-    @SuppressLint("NotifyDataSetChanged")
     override fun onItemClick(item: MyMusic.Data, position: Int) {
+
         item.isSelected = true
         playPosition = position
-        myAdapter?.notifyDataSetChanged()
 
         mainActivity.tvSongTitle.text = item.title
         mainActivity.tvSingerName.text = item.artist.name

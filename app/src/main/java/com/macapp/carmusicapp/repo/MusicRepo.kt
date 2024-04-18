@@ -1,13 +1,13 @@
-package com.sk.carmusicapp.repo
+package com.macapp.carmusicapp.repo
 
 import androidx.lifecycle.MutableLiveData
-import com.sk.carmusicapp.api.ApiInterface
-import com.sk.carmusicapp.api.RetrofitApi
+import com.macapp.carmusicapp.api.ApiInterface
+import com.macapp.carmusicapp.api.RetrofitApi
 import okhttp3.ResponseBody
 import org.json.JSONException
 import org.json.JSONObject
-import com.sk.carmusicapp.api.Response
-import com.sk.carmusicapp.model.MyMusic
+import com.macapp.carmusicapp.api.Response
+import com.macapp.carmusicapp.model.MyMusic
 
 class MusicRepo {
 //    private val context by lazy { MusicClass.getContext }

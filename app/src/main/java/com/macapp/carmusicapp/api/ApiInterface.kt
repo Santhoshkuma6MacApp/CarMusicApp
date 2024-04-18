@@ -1,6 +1,6 @@
-package com.sk.carmusicapp.api
+package com.macapp.carmusicapp.api
 
-import com.sk.carmusicapp.model.MyMusic
+import com.macapp.carmusicapp.model.MyMusic
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Headers

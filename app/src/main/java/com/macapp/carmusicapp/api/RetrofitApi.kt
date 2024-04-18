@@ -1,4 +1,4 @@
-package com.sk.carmusicapp.api
+package com.macapp.carmusicapp.api
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder

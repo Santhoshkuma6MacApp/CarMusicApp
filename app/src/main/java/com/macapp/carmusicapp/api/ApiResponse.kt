@@ -1,4 +1,4 @@
-package com.sk.carmusicapp.api
+package com.macapp.carmusicapp.api
 
 sealed class Response<T>(
     val data: T? = null,

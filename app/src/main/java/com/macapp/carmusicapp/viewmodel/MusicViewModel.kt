@@ -1,7 +1,7 @@
-package com.sk.carmusicapp.viewmodel
+package com.macapp.carmusicapp.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.sk.carmusicapp.repo.MusicRepo
+import com.macapp.carmusicapp.repo.MusicRepo
 
 class MusicViewModel: ViewModel() {
     private val musicRepo by lazy { MusicRepo() }
@@ -9,5 +9,6 @@ class MusicViewModel: ViewModel() {
     suspend fun getMusicList(eminem:String) {
         musicRepo.questionList(eminem)
     }
+
 
 }
